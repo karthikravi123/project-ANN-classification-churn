@@ -4,14 +4,13 @@ import tensorflow as tf
 from sklearn.preprocessing import StandardScaler,LabelEncoder,OneHotEncoder
 import pandas as pd
 import pickle
+from keras import models as keras_models
 
 
-##load the trained model
-model = tf.keras.models.load_model('model.h5')
-# Save it in the new format
-model.save("model.keras")  # This uses the native Keras 3 format
 
-model = tf.keras.models.load_model("model.keras")
+model = keras_models.load_model('model.h5', compile=False)
+model.save('model.keras', save_format='keras_v3')
+model = keras_models.load_model('model.keras', compile=False)
 
 ##load the encoder and scaler
 with open('onehot_encoder_geo.pkl','rb') as file:
@@ -87,4 +86,5 @@ if st.button("Predict Churn"):
         st.error("⚠️ The customer is likely to churn.")
     else:
         st.success("✅ The customer is not likely to churn.")
+
 
