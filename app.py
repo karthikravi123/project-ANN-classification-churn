@@ -6,7 +6,7 @@ import pandas as pd
 import pickle
 
 ##load the trained model
-model = tf.keras.models.load_model('model.keras')
+model = tf.keras.models.load_model('model.keras',compile=False)
 
 ##load the encoder and scaler
 with open('onehot_encoder_geo.pkl','rb') as file:
@@ -82,4 +82,5 @@ if st.button("Predict Churn"):
         st.error("⚠️ The customer is likely to churn.")
     else:
         st.success("✅ The customer is not likely to churn.")
+
 
